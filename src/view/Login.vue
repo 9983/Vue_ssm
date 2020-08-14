@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     doLogin: function () {
-      let url = this.axios.urls.SERVER + this.axios.urls.SYSTEM_USER_DOLOGIN
+      /* let url = this.axios.urls.SERVER + this.axios.urls.SYSTEM_USER_DOLOGIN
       this.axios.post(url, {
         uname: this.uname,
         upwd: this.upwd
@@ -46,7 +46,16 @@ export default {
         }
       }).catch((response) => {
         console.log(response)
-      })
+      }) */
+      if (this.uname == 'admin' & this.upwd == 123) {
+        this.$message.success('登陆成功!')
+
+        this.$router.push({
+          name: 'index'
+        })
+      } else {
+        this.$message.error('登录失败!')
+      }
     },
     doRegister: function () {
       this.$router.push({
