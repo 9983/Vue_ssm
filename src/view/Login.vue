@@ -2,11 +2,11 @@
   <div class="login-wrap">
     <el-form label-width="100px" :model="ruleForm"  class="demo-ruleForm login-container">
       <h3 class="title">用户登录</h3>
-      <el-form-item label="用户:" prop="User_name">
-        <el-input v-model="uname" ></el-input>
+      <el-form-item label="用户:" prop="userAccount">
+        <el-input v-model="userAccount" ></el-input>
       </el-form-item>
-      <el-form-item label="密码:" prop="User_pwd">
-        <el-input type="password" v-model="upwd"></el-input>
+      <el-form-item label="密码:" prop="userpwd">
+        <el-input type="password" v-model="userpwd"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="doLogin()" style="width: 160px;" round plain>提交</el-button>
@@ -24,38 +24,37 @@ export default {
   name: 'Login',
   data: function () {
     return {
-      uname: null,
-      upwd: null
+      userAccount: null,
+      userpwd: null
     }
   },
   methods: {
     doLogin: function () {
-      /* let url = this.axios.urls.SERVER + this.axios.urls.SYSTEM_USER_DOLOGIN
+      let url = this.axios.urls.SERVER + this.axios.urls.SSMUSER_LOGIN
       this.axios.post(url, {
-        uname: this.uname,
-        upwd: this.upwd
-      }).then((response) => {
-        if (response.data != null) {
-          console.log(response)
+        userAccount: this.userAccount,
+        userpwd: this.userpwd
+      }).then((resp) => {
+        if (resp.data != '1' && resp.data != '2') {
+          console.log(resp.data)
           this.$message.success('登录成功！')
+
+          /* 将登陆对象放入localStorage中 */
+          localStorage.setItem('user', resp.data)
+
           setTimeout(() => {
             this.$router.push({
               name: 'index'
             })
           })
+        } else if (resp.data == '1') {
+          this.$message.error('密码错误!')
+        } else if (resp.data == '2') {
+          this.$message.error('该账号不存在!')
         }
-      }).catch((response) => {
-        console.log(response)
-      }) */
-      if (this.uname == 'admin' & this.upwd == 123) {
-        this.$message.success('登陆成功!')
-
-        this.$router.push({
-          name: 'index'
-        })
-      } else {
-        this.$message.error('登录失败!')
-      }
+      }).catch((resp) => {
+        console.log(resp)
+      })
     },
     doRegister: function () {
       this.$router.push({
@@ -63,9 +62,19 @@ export default {
       })
     },
     doResetting: function () {
-      this.uname = ''
-      this.upwd = ''
+      this.userAccount = ''
+      this.userpwd = ''
+    },
+    // 获取上个页面传递的id
+    getAccount: function () {
+      let Account = this.$route.params.userAccount
+      this.userAccount = Account
     }
+  },
+  created () {
+  },
+  mounted () {
+    this.getAccount()
   }
 }
 </script>

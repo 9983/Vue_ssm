@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 导航条 -->
-    <el-menu    router="true" style="margin-top: -50px;" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="index" style="margin-left: 400px;" >首页</el-menu-item>
+    <el-menu    router="true" style="margin-top: -50px;"  class="el-menu-demo" mode="horizontal" >
+      <el-menu-item index="/" style="margin-left: 400px;" >首页</el-menu-item>
 
       <!-- 课程展示  -->
       <el-submenu index="2" >
@@ -41,107 +41,35 @@
     </el-menu>
     <div class="line"></div>
 
- <!-- 热门课程 -->
- <!-- <div style="  margin-top: 50px;">
+ <!-- 所有课程 -->
+     <h1>全部课程</h1>
+ <div style="  margin-top: 50px;" >
 
-      <h1></h1>
+      <el-row>
 
-      <el-row style="margin-top: 50px; margin-right: 100px;">
-        <el-col  :span="5"   :key="1" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-            <img :src="sss[0]" class="image" >
-            <div style="padding: 14px;">
-            <div> <font size="5" style=" ">英语语法</font>  <span>刘教授</span> </div>
-              <span><font size="2">{{ssstest[0]}}</font></span>
-              <div class="bottom clearfix">
-                <time class="time">{{date}}</time>
-                <el-button type="success" style="width: 55px; height: 40px;"  class="button">$80</el-button>
-              </div>
+      <el-col   v-for="(item,index) in CourseList" :span="5"    :key="index" :offset="1 > 0 ? 2 : 0"  style="margin-top: 10px;" >
+        <el-card :body-style="{ padding: '0px' }"  shadow="hover">
+          <!-- 图片-->
+         <img :src="CourseList[index].courseUrl" class="image"   @click="ReadCourse(item)">
+         <!-- 文字 spart -->
+         <div>
+           <h4>{{CourseList[index].courseName}}</h4>
+         </div>
+         <div style="padding: 14px;">
+            <span>{{CourseList[index].courseBak}}</span>
+            <div class="bottom clearfix" style="margin-bottom: -5px;">
+              <time class="time" style="margin-left: -200px;margin-bottom: -10px;">课时:{{CourseList[index].courceCount}}</time>
+              <el-button type="success" class="button" @click="BuyCourse(CourseList[index].courseId)"   style="width: 45px; height: 40px; margin-right: -5px; " >${{CourseList[index].courseMoney}}</el-button>
             </div>
-          </el-card>
-        </el-col>
+          </div>
 
-        <el-col  :span="5"   :key="2" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-            <img :src="sss[1]" class="image"  >
-            <div style="padding: 14px;">
-              <span>{{ssstest[1]}}</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ date }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-
-        <el-col  :span="5"   :key="3" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-            <img :src="sss[2]" class="image" >
-            <div style="padding: 14px;">
-              <span>{{ssstest[2]}}</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ date }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-
-        <el-col  :span="5"   :key="4" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-           <img :src="sss[3]" class="image" >
-           <div style="padding: 14px;">
-              <span>{{ssstest[3]}}</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ date }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-
-        <el-col  :span="5"   :key="5" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-           <img :src="sss[3]" class="image" >
-           <div style="padding: 14px;">
-              <span>{{ssstest[3]}}</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ date }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-
-        <el-col  :span="5"   :key="6" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-           <img :src="sss[3]" class="image" >
-           <div style="padding: 14px;">
-              <span>{{ssstest[3]}}</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ date }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-
-        <el-col  :span="5"   :key="4" :offset="1 > 0 ? 2 : 0">
-          <el-card :body-style="{ padding: '0px' }"  shadow="hover">
-           <img :src="sss[3]" class="image" >
-           <div style="padding: 14px;">
-              <span>{{ssstest[3]}}</span>
-              <div class="bottom clearfix">
-                <time class="time">{{ date }}</time>
-                <el-button type="text" class="button">操作按钮</el-button>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
+          <!--文字 end -->
+        </el-card>
+      </el-col>
 
       </el-row>
 
-    </div> -->
+    </div>
 
     <el-input v-model="text"></el-input>
     <el-button @click="SelectCourseLike()" type="primary">查询</el-button>
@@ -155,26 +83,8 @@ export default {
   data: function () {
     return {
       date: new Date().getTime(),
-      sss: [
-        '../../../static/img/bg-img/c1.jpg',
-        '../../../static/img/bg-img/c2.jpg',
-        '../../../static/img/bg-img/c3.jpg',
-        '../../../static/img/bg-img/c4.jpg'],
-      ssstest: [
-        'Klng ipsum dolor坐下，一直保持良好状态。Fusce enim nulla，mollis eu metus in，人马座',
-        'Lorem ipsum dolor坐下，一直保持良好状态。Fusce enim nulla，mollis eu metus in，人马座',
-        'Gink ipsum dolor坐下，一直保持良好状态。Fusce enim nulla，mollis eu metus in，人马座',
-        'Sping ipsum dolor坐下，一直保持良好状态。Fusce enim nulla，mollis eu metus in，人马座'
-
-      ],
-      imgList: [
-        {url: require('../../../static/img/blog-img/山.jpg')},
-        {url: require('../../../static/img/bg-img/e2.jpg')},
-        {url: require('../../../static/img/bg-img/e3.jpg')}
-      ],
-      list: '',
+      CourseList: [],
       text: null
-
     }
   },
   methods: {
@@ -182,18 +92,38 @@ export default {
     SelectCourseLike: function () {
       // 提交
       console.log('前台:' + this.text)
-
       this.axios.post(this.axios.urls.SSMCOURSE_SELECTCOURSELIKENAME, {
-
-        userId: this.text
+        CourseName: this.text
       }).then(resp => {
-        console.log(resp.data)
+        this.CourseList = resp.data
+        for (var i = 0; i < this.CourseList.length; i++) {
+          console.log(this.CourseList[i])
+        }
       }).catch((resp) => {
         console.log(resp)
       })
+    },
+    /* 查看事件 */
+    ReadCourse: function (item) {
+      console.log('查看事件:' + item)
+      this.$router.push({
+        name: 'ReadCourse', params: {item: item}
+      })
+    },
+    /* 购买 */
+    BuyCourse: function (courseId) {
+      console.log('购买事件:' + courseId)
     }
+  },
+  // 在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。
+  created () {
+    this.SelectCourseLike()
+  },
+  // 在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+  mounted () {
 
   }
+
 }
 </script>
 

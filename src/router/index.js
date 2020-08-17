@@ -7,13 +7,13 @@ import Register from '@/view/Register'
 import test from '@/view/test.vue'
 import index from '@/view/Front_Desk/index.vue'
 import AllCourse from '@/view/Front_Desk/AllCourse.vue'
-import test_2 from '@/components/test_2.vue'
+import ReadCourse from '@/view/Front_Desk/ReadCourse.vue'
 
 Vue.use(Router)
 export default new Router({
   routes: [
-    {
-      path: '/',
+   {
+      path: '/Login',
       name: 'Login',
       component: Login
     },
@@ -28,7 +28,7 @@ export default new Router({
       component: test
     },
     {
-      path: '/index',
+      path: '/',
       name: 'index',
       component: index
 
@@ -39,9 +39,9 @@ export default new Router({
       component: AllCourse
     },
     {
-      path: '/test_2',
-      name: 'test_2',
-      component: test_2
+      path: '/ReadCourse',
+      name: 'ReadCourse',
+      component: ReadCourse
     }
 
   ]

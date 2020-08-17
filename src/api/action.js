@@ -4,8 +4,8 @@
  */
 export default {
   'SERVER': 'http://localhost:8080/IDEA_WorkSpace', // 服务器
-  'SYSTEM_USER_DOLOGIN': '/user/username', // 登陆
-  'SYSTEM_USER_DOREG': '/user/AddUser', // 注册
+  'SSMUSER_LOGIN': '/SsmUser/login', // 登陆
+  'SSMUSER_REGISTER': '/SsmUser/register', // 注册
   'SSM_USER_SELECTALL': '/SsmUser/selectUserAll', // 查询所有用户
   'SSMUSER_SELECTUSERBYID': '/SsmUser/selectUserByID', // 根据ID查询单个用户对象
   'SSMCOURSE_SELECTCOURSELIKENAME': '/SsmCourse/SelectCourseLikeName',// 模糊查询课程

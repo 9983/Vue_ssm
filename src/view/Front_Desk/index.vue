@@ -3,7 +3,7 @@
 
     <!-- 导航条 -->
     <el-menu    router="true" style="margin-top: -50px;" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="index" style="margin-left: 400px;" >首页</el-menu-item>
+      <el-menu-item index="/" style="margin-left: 400px;" >首页</el-menu-item>
 
       <!-- 课程展示  -->
       <el-submenu index="2" >
@@ -28,6 +28,10 @@
         <el-menu-item index="2-2"></el-menu-item>
         <el-menu-item index="2-3"></el-menu-item>
       </el-submenu>
+
+
+        <el-menu-item index="login">登陆</el-menu-item>
+
 
       <!-- 意见反馈  登录后展示 -->
 
@@ -161,7 +165,12 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     }
-   
+
+
+  },
+  mounted() {
+    /* 获取对象localStorage中的User */
+   let User =  localStorage.getItem("user")
 
   }
 }
