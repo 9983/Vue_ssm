@@ -42,13 +42,15 @@ export default {
           userpwd: this.userpwd
         }).then((response) => {
           console.log(response.data)
-          if (response.data != null) {
+          if (response.data == "1") {
             this.$message.success('注册成功！')
 
             this.$router.push({
               name: 'Login', params: {userAccount: this.userAccount}
             })
 
+          }else{
+             this.$message.error('该账号已存在！')
           }
         }).catch((response) => {
           console.log(response)
